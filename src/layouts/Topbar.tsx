@@ -1,75 +1,41 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import styled from 'styled-components'
-import { Box } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom';
-import { slide as Menu } from 'react-burger-menu'
+import { slide as Menu, State } from 'react-burger-menu'
 
 const Topbar: React.FC = () => {
+    const styles = {
+        bmMenuWrap: {
+          transition: 'push'
+        }
+      }
     const [_showNavBar, setShowNavBar] = useState(false);
-    
-    const hamburgerLine1 = useRef<any>(null);
-    const hamburgerLine2 = useRef<any>(null);
-    const hamburgerLine3 = useRef<any>(null);
-    const _NavBarRef     = useRef<any>(null);
-    const _closeBtn      = useRef<any>(null);
+    const _mobileContainer = useRef<any>(null);
+
     
     const handleNavigate = ( handler : any ) => {
         document.getElementById(handler)?.scrollIntoView({ behavior: 'smooth' })
+        setShowNavBar(false);
     }
     
-    const styles = {
-        bmBurgerButton: {
-          position: 'fixed',
-          width: '36px',
-          height: '30px',
-          left: '36px',
-          top: '36px'
-        },
-        bmBurgerBars: {
-          background: '#373a47'
-        },
-        bmBurgerBarsHover: {
-          background: '#a90000'
-        },
-        bmCrossButton: {
-          height: '24px',
-          width: '24px'
-        },
-        bmCross: {
-          background: '#bdc3c7'
-        },
-        bmMenuWrap: {
-          position: 'fixed',
-          height: '100%'
-        },
-        bmMenu: {
-          background: '#373a47',
-          padding: '2.5em 1.5em 0',
-          fontSize: '1.15em'
-        },
-        bmMorphShape: {
-          fill: '#373a47'
-        },
-        bmItemList: {
-          color: '#b8b7ad',
-          padding: '0.8em'
-        },
-        bmItem: {
-          display: 'inline-block'
-        },
-        bmOverlay: {
-          background: 'rgba(0, 0, 0, 0.3)'
-        }
-      }
+    const showMobileMenu = () => {
+        setShowNavBar(!_showNavBar)
+    }
+    const closeMenu = () => {
+        setShowNavBar(false);
+    }
+
+
+ 
     return (
         <StyledContainer>
             <>
             <Header>
-                <Logo>
-                    <img src="/images/logo.png" alt='' />
-                </Logo>
                 <NavBar>
                     <NavList>
+                        <li><a onClick={()=>handleNavigate('home')}>Home</a></li>
                         <li><a onClick={()=>handleNavigate('ecosystem')}>EcoSystem</a></li>
                         <li><a onClick={()=>handleNavigate('buy')}>Buy</a></li>
                         <li><a href="https://kunuswap.com/#/swap" target="_blank">KunuSwap</a></li>
@@ -78,19 +44,22 @@ const Topbar: React.FC = () => {
                     
                 </NavBar>
             </Header>
+            <OpenButtonBox onClick={showMobileMenu}>
+                <Box/>
+                <Box/>
+                <Box/>
+            </OpenButtonBox>
             <MobileHeader>
-                <MobileLogo>
-                    <img src="/images/landing/logo.png" alt='' />
-                </MobileLogo>
-                <Menu   right>
-                    <a className="bm-item"  onClick={()=>handleNavigate('ecosystem')}>EcoSystem</a>
-                    <a className="bm-item"  onClick={()=>handleNavigate('buy')}>Buy</a>
-                    <a className="bm-item"  href="https://kunuswap.com/#/swap" target="_blank">KunuSwap</a>
-                    <a className="bm-item" onClick={()=>handleNavigate('community')}>Community</a>
-                    <MobileNarutoBack>
-                        <img  style={{width : 250}} src="/images/landing/naruto.png" />
-                    </MobileNarutoBack>
-                </Menu>
+                <MobileContainer ref={_mobileContainer} active={_showNavBar}>
+                    {/* <img src="/images/assets/close.png"  onClick={showMobileMenu}/> */}
+                    <svg onClick={showMobileMenu} className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="CloseIcon"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                    <a onClick={()=>handleNavigate('home')}>Home</a>
+                    <a onClick={()=>handleNavigate('ecosystem')}>EcoSystem</a>
+                    <a onClick={()=>handleNavigate('buy')}>Buy</a>
+                    <a href="https://kunuswap.com/#/swap" target="_blank">KunuSwap</a>
+                    <a onClick={()=>handleNavigate('community')}>Community</a>
+                </MobileContainer>
+
                 
             </MobileHeader>
         </>
@@ -99,78 +68,7 @@ const Topbar: React.FC = () => {
 }
 
 const StyledContainer = styled(Box)`
-/* Position and sizing of burger button */
-.bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  right: 36px;
-  top: 36px;
-}
 
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: white;
-}
-
-/* Color/shape of burger icon bars on hover*/
-.bm-burger-bars-hover {
-  background: #a90000;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: white;
-}
-
-/*
-Sidebar wrapper styles
-Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-*/
-.bm-menu-wrap {
-  position: fixed;
-  height: 100%;
-}
-
-/* General sidebar styles */
-.bm-menu {
-  background: #373a47;
-  background-image : url('/images/landing/mobile-hamburger.png');
-  background-size : 100% 100% ;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-  opacity : 0.8;
-}
-
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
-
-/* Wrapper for item list */
-.bm-item-list {
-  color: #b8b7ad;
-  padding: 1.5em;
-}
-
-/* Individual item */
-.bm-item {
-  display: inline-block;
-  color : white ;
-  font-size : 20px ;
-  font-weight : bolder;
-}
-
-/* Styling of overlay */
-.bm-overlay {
-  background: rgba(0, 0, 0, 0.3);
-}
 `
 
 
@@ -195,30 +93,21 @@ const Header = styled(Box)`
     align-items: center;
     z-index : 9999;
     visibility : hidden;
+    display: flex;
+    justify-content: right ;
     @media screen and (min-width : 980px) {
-        width : 980px;
+        // width : 980px;
         // left : calc((100% - 980px) / 2);
         visibility : visible;
     }
     @media screen and (min-width : 1400px) {
-        width : 1400px;
-        left : calc((100% - 1400px) / 2);
+        // width : 1400px;
+        // left : calc((100% - 1400px) / 2);
         visibility : visible;
     }
 `;
 
-const Logo = styled(Box)`
-    display : flex ;
-    // width : ;
-    >img {
-        
-        width : 55px ;
-        height : 55px ;
-        @media screen and (min-width : 1400px){
-            margin-left : 50px;
-        }
-    }
-`
+
 
 const NavList = styled.ul`
     background-image : url('/images/landing/Loading_Bar 2.png');
@@ -254,38 +143,77 @@ const NavList = styled.ul`
 `;
 
 const MobileHeader = styled(Box)`
+    height : 0px ;
+    // overflow : hidden ;
     position : fixed ;
     top : 0px; 
-    left : 0px ;
+    right : 0px ;
     // background-color : black ;
     display : block ;
-    height : 60px;
     width : 100%;
     z-index : 9999;
     @media screen and (min-width : 980px){
         display : none ;
     }
-`
-const MobileLogo = styled(Box)`
-    position : absolute ;
-    top : 30px ;
-    left : 20px;
     >img {
-        height : 50px;
-    }    
+        width : 50px;
+        height  : 50px;
+       
+    }
 `
 
-const HamburgerButton = styled.button`
+interface MobileContainerProps{
+    ref : any
+    active: any
+}
+
+const MobileContainer = styled(Box)<MobileContainerProps>`
+    height : 100vh;
     position : absolute ;
-    right : 50px ;
-    width : 50px;
-    height : 50px;
-
+    transition:  .2s ease;
+    display : flex ;
+    flex-direction : column ;
+    text-align : left ;
+    background-color : rgb(2, 0, 5) ;
+    width : 100% ;
+    padding : 20px ;
+    padding-top : 70px ;
+    transform : translateY(${({ active }) => active ? 0:-100}%) translateZ(0px);
+    >a {
+        color : white ;
+        font-size : 25px ;
+        font-weight : bold ;
+        line-height: 2;
+    }
+    >svg {
+        position : absolute ;
+        top : 20px ;
+        right : 20px ;
+        width : 30px;
+        height  : 30px;
+        background : white ;
+    }
 `
 
-const MobileNarutoBack = styled(Box)`
-    display : flex !important;
-    margin-top : 30px ;
-    justify-content: center;
+const OpenButtonBox = styled(Box)`
+    display : block ;
+    position : fixed ;
+    top : 20px ;
+    right : 20px ;
+    z-index : 100;
+    >img {
+        width : 40px;
+        height  : 40px;
+    }
+    @media screen and (min-width : 980px){
+        display : none ;
+    }   
+    >div {
+        width: 35px;
+        height: 5px;
+        background-color: white;
+        margin: 6px 0;
+    }
 `
+
 export default Topbar;

@@ -70,7 +70,7 @@ const PageContainer = styled(Box)`
     background-color : #18171F;
     border-radius : 15px;
     width : 90%;
-    margin-left : 20px;
+    margin-left : calc(10% / 2 );
     margin-top : 20px;
     display : flex ;
     flex-direction : column ;

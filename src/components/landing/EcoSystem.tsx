@@ -17,10 +17,10 @@ const EcoSystem: React.FC = () => {
             <PageContainer>
                 <Title  data-aos="fade-up" data-aos-duration="1000">KUNU Ecosystem</Title>   
                 <SubTitle><h2>Kurama Inu token</h2></SubTitle>
-                <SubIndexBox data-aos="flip-down" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
-                    <SubBox>
+                <SubIndexBox>
+                    <SubBox   data-aos="flip-down"  data-aos-duration="500">
                         <SubIndexImage>
-                            <img src="/images/landing/logo.png" />
+                            <img src="/images/landing/diamond.png" />
                         </SubIndexImage>
                         <SubIndexTitle>
                             Passive income system
@@ -33,9 +33,9 @@ const EcoSystem: React.FC = () => {
                             Community buy or sell the Token.
                         </SubIndexContent>
                     </SubBox>
-                    <SubBox>
+                    <SubBox  data-aos="flip-down"  data-aos-duration="1000">
                         <SubIndexImage>
-                            <img src="/images/landing/logo.png" />
+                            <img src="/images/landing/dollar.png" />
                         </SubIndexImage>
                         <SubIndexTitle>
                             Deflationary Currency
@@ -47,9 +47,9 @@ const EcoSystem: React.FC = () => {
                             That our token supply constantly decreasing and making
                             Your KUNU increase in value over time.
                         </SubIndexContent></SubBox>
-                    <SubBox>
+                    <SubBox   data-aos="flip-down"  data-aos-duration="1500">
                         <SubIndexImage>
-                            <img src="/images/landing/logo.png" />
+                            <img src="/images/landing/fish.png" />
                         </SubIndexImage>
                         <SubIndexTitle>
                             Anti-Pump&Dump Trap
@@ -67,10 +67,16 @@ const EcoSystem: React.FC = () => {
 
 const StyledContainer = styled(Box)`
     background-image : url('/images/landing/Section-1.png');
-    background-size : 100% 100%;
+    background-size : auto 100%;
     background-repeat : no-repeat ;
+    background-color : #1D1C24;
     width : 100%;
     min-height : 100vh;
+    position : relative ;
+    background-position: right 35%;
+    @media screen and (min-width : 1200px){
+        background-size : 100% 100%;
+    }
 `
 
 const PageContainer = styled(Box)`
@@ -79,6 +85,7 @@ const PageContainer = styled(Box)`
     color : white ;
     display : flex ;
     flex-direction : column ;
+    padding-bottom : 50px;
     @media screen and (min-width : 1400px ){
         width : 1400px ;
         margin : auto ;
@@ -114,6 +121,10 @@ const SubTitle = styled(Box)`
         -webkit-text-fill-color: transparent;
         margin: 0;
     }
+    @media screen and (max-width : 500px){
+        padding-left : 20px ;
+        padding-right : 20px ; 
+    }
 `
 const SubIndexBox = styled(Box)`
     z-index : 10 ;
@@ -135,8 +146,8 @@ const SubIndexImage = styled(Box)`
     display: flex;
     justify-content: center;
     >img {
-        width : 150px ;
-        height : 150px ;
+        width : 200px ;
+        height : 250px ;
     }
 `   
 
@@ -155,11 +166,11 @@ const NarutoBox = styled(Box)`
     // background-image : url('/images/landing/naruto.png');
     // background-size : 100% 100% ;
     position : absolute ;
-    top : 0px ;
+    bottom : 0px ;
     right : 0px ;
     z-index : 1 ;
-    width : 400px;
-    height : 100vh;
+    width : 300px;
+    height : 90vh;
     @media screen and (min-width : 1400px ){
         background-image : url('/images/landing/naruto.png');
         background-size : 100% 100% ;

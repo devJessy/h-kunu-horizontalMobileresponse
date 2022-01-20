@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import BigBoy from '../assets/fonts/bba.ttf'
+import MyriadSemibold from '../assets/fonts/myriad-pro/MYRIADPRO-SEMIBOLD.woff';
+import MyriadRegular from '../assets/fonts/myriad-pro/MyriadPro-Light.woff';
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -9,9 +11,16 @@ const GlobalStyle = createGlobalStyle`
         font-display: swap;
         src: url('${BigBoy}') format('truetype');
     }
-    * {
-        font-family: Poppins, sans-serif;
+    @font-face{
+        font-family : 'Myriad Pro Semibold';
+        src: url('${MyriadSemibold}');
     }
+   
+    @font-face{
+        font-family : 'Myriad Pro Regular';
+        src: url('${MyriadRegular}');
+    }
+
     html, body, #__next {
         height: 100%;
         margin: 0px;

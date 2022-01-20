@@ -66,6 +66,7 @@ const SubBox = styled(Box)`
     margin-left : 20px ;
     margin-right : 20px ;
     width : 100px;
+    height : 100px;
     >div {
         color : white ;
         text-align : center ;
